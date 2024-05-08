@@ -50,6 +50,22 @@ namespace Netwise.Controllers
                 TempData["ErrorMessage"] = $"B³¹d: {e.Message}";
                 return RedirectToAction("Index");
             }
-        }    
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> OpenFile()
+        {
+            try
+            {
+                string fileContent = await _fileService.OpenFile();
+                byte[] fileBytes = Encoding.UTF8.GetBytes(fileContent);
+                return File(fileBytes, "text/plain", "example.txt");
+            }
+            catch (Exception e)
+            {
+                TempData["ErrorMessage"] = $"B³¹d: {e.Message}";
+                return RedirectToAction("Index");
+            }
+        }
     }
 }
