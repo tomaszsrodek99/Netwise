@@ -1,32 +1,55 @@
 using Microsoft.AspNetCore.Mvc;
+using Netwise.Interfaces;
 using Netwise.Models;
-using System.Diagnostics;
+using System.Text;
+using System.Text.Json;
 
 namespace Netwise.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IFileService _fileService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IFileService fileService)
         {
-            _logger = logger;
+            _fileService = fileService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            try
+            {
+                var model = await _fileService.ReadFile();
+
+                if (model == null)
+                {
+                    return View(new List<CatFact>());
+                }
+                else
+                {
+                    return View(model);
+                }
+            }          
+            catch (Exception e) {
+                TempData["ErrorMessage"] = $"B³¹d: {e.Message}";
+                return View(new List<CatFact>());
+            }
         }
 
-        public IActionResult Privacy()
+        [HttpGet]
+        public async Task<IActionResult> GetNewData()
         {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+            try
+            {
+                await _fileService.WriteToFile();
+                TempData["SuccessMessage"] = "Poprawnie zapisano dane w pliku tekstowym!";
+                return RedirectToAction("Index");
+            }
+            catch (Exception e)
+            {
+                TempData["ErrorMessage"] = $"B³¹d: {e.Message}";
+                return RedirectToAction("Index");
+            }
+        }    
     }
 }

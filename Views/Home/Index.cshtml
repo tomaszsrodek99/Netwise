@@ -1,8 +1,56 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model List<Netwise.Models.CatFact>
+
+@{
+    ViewData["Title"] = "Zadanie rekrutacyjne";
+    int number = 1;
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+@await Html.PartialAsync("_Alerts")
+
+<div class="center-container d-flex flex-column justify-content-center">
+    <div class="btn-container d-flex flex-row justify-content-center">
+        <a href="/Home/GetNewData">
+            <button class="btn btn-primary">Pobierz nowy rekord</button>
+        </a>
+        <a href="/Home/OpenFile">
+            <button class="btn btn-primary">Otwórz plik</button>
+        </a>
+    </div>
+    <div class="text-center content">
+        <div id="cat-fact-list" class="d-flex flex-column align-items-center">
+            @if (Model.Any())
+            {
+                <table id="category-list" class="display table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>L.p</th>
+                            <th>Tekst</th>
+                            <th>Długość</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @number.
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Fact)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Lenght)
+                                </td>
+                            </tr>
+                            number++;
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <p>Brak zapisanych danych w pliku.</p>
+            }
+        </div>
+    </div>
 </div>
