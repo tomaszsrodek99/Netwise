@@ -1,1 +1,3 @@
 {"fact":"Cat bites are more likely to become infected than dog bites.","length":60}
+{"fact":"Approximately 40,000 people are bitten by cats in the U.S. annually.","length":68}
+{"fact":"Every year, nearly four million cats are eaten in Asia.","length":55}

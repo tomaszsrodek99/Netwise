@@ -8,7 +8,7 @@ namespace Netwise.Models
         [Display(Name = "Tekst")]
         [JsonPropertyName("fact")]
         public string Fact { get; set; }
-        [Display(Name = "Długość")]
+        [Display(Name = "Ilość znaków")]
         [JsonPropertyName("length")]
         public int Lenght { get; set; }
     }

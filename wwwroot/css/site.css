@@ -56,10 +56,9 @@ body {
 
 .content {
     max-height: 400px;
-    overflow-y: auto;
 }
 
-#cat-fact-list {
+#cat-fact-content {
     margin: 0 15px;
 }
 

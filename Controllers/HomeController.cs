@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Mvc;
 using Netwise.Interfaces;
 using Netwise.Models;
 using System.Text;
-using System.Text.Json;
 
 namespace Netwise.Controllers
 {

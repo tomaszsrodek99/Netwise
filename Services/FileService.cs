@@ -1,7 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Netwise.Interfaces;
+﻿using Netwise.Interfaces;
 using Netwise.Models;
-using System.Text;
 using System.Text.Json;
 
 namespace Netwise.Services
@@ -10,12 +8,10 @@ namespace Netwise.Services
     {
         private readonly HttpClient _httpClient;
         private readonly string _filePath;
-        private readonly IWebHostEnvironment _webHostEnvironment;
-        public FileService(HttpClient httpClient, IWebHostEnvironment webHostEnvironment)
+        public FileService(HttpClient httpClient)
         {
             _httpClient = httpClient;
             _filePath = "wwwroot/file/example.txt";
-            _webHostEnvironment = webHostEnvironment;
         }
 
         public async Task<string> OpenFile()
